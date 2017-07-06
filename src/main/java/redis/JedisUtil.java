@@ -1,6 +1,7 @@
 package redis;
 
 import com.alibaba.fastjson.JSON;
+import common.PropertiesUtil;
 import hive.HiveUtil;
 import model.HiveTableData;
 import redis.clients.jedis.Jedis;
@@ -9,18 +10,30 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 /**
  * Created by fansy on 2017/7/6.
  */
 public class JedisUtil {
-    private static final String host="localhost";
-    private static final int port =6379 ;
-    private static final String password="redis";
-    private static final int db =1;
+    private static  String host = null;
+    private static  int port = -1 ;
+    private static  String password = null;
+    private static  int db = -1;
     private static JedisPool jedisPool;
     private static Jedis jedis;
+
+    private static final String REDISFILE="redis.properties";
+
+    static{
+        Properties properties= PropertiesUtil.getProperty(REDISFILE);
+        host = properties.getProperty("redis.host");
+        port = Integer.parseInt(properties.getProperty("redis.port"));
+        password = properties.getProperty("redis.password");
+        db = Integer.parseInt(properties.getProperty("redis.db"));
+    }
+
     /**
      * 获取客户端连接
      * @return
@@ -43,6 +56,7 @@ public class JedisUtil {
     public static void del(String tableName){
         getJedis().del(HiveUtil.tableKeyPrefix+tableName);
     }
+
 
     public static Set<String> getKeys(String pattern){
         return getJedis().keys(pattern);
