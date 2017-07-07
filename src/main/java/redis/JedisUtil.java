@@ -3,13 +3,12 @@ package redis;
 import com.alibaba.fastjson.JSON;
 import common.PropertiesUtil;
 import hive.HiveUtil;
-import model.HiveTableData;
+import model.RedisHiveTableData;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -47,7 +46,7 @@ public class JedisUtil {
         return jedis;
     }
 
-    public static void put(HiveTableData data){
+    public static void put(RedisHiveTableData data){
         getJedis().set(HiveUtil.tableKeyPrefix+data.getTableName(),
                 JSON.toJSONString(data));
 

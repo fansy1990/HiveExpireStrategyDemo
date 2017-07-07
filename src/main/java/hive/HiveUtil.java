@@ -1,6 +1,6 @@
 package hive;
 
-import model.HiveTableData;
+import model.RedisHiveTableData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.JedisUtil;
@@ -15,7 +15,7 @@ public class HiveUtil {
 
     public static void createTable(String tableName,int expireTime){
         // 1. 添加数据到Redis中
-        JedisUtil.put(new HiveTableData(tableName,expireTime));
+        JedisUtil.put(new RedisHiveTableData(tableName,expireTime));
         // 创建Hive表
         logger.info("创建Hive表{},失效时间是{}...",new Object[]{tableName,expireTime});
     }

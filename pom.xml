@@ -12,9 +12,33 @@
         <jedis.version>2.8.1</jedis.version>
         <json.version>1.2.7</json.version>
         <slf.version>1.7.7</slf.version>
+        <mysql.version>5.1.34</mysql.version>
+        <hadoop.version>2.6.4</hadoop.version>
+        <hive.version>1.2.1</hive.version>
     </properties>
 
 <dependencies>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-client</artifactId>
+        <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hive</groupId>
+        <artifactId>hive-jdbc</artifactId>
+        <version>${hive.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.hive</groupId>
+        <artifactId>hive-exec</artifactId>
+        <version>${hive.version}</version>
+    </dependency>
     <dependency>
         <groupId>redis.clients</groupId>
         <artifactId>jedis</artifactId>

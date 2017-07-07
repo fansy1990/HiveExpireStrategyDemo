@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by fansy on 2017/7/6.
  */
-public class HiveTableData {
+public class RedisHiveTableData {
     public String getTableName() {
         return tableName;
     }
@@ -34,8 +34,8 @@ public class HiveTableData {
     private Date startDate;
     private int liveTime; // minutes
 
-    public HiveTableData(){}
-    public HiveTableData(String tableName,int expireTime){
+    public RedisHiveTableData(){}
+    public RedisHiveTableData(String tableName, int expireTime){
         this.tableName=tableName;
         this.startDate = new Date();
         this.liveTime = expireTime;

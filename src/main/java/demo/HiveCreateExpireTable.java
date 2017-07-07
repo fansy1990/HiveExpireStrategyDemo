@@ -2,7 +2,7 @@ package demo;
 
 import com.alibaba.fastjson.JSON;
 import hive.HiveUtil;
-import model.HiveTableData;
+import model.RedisHiveTableData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.JedisUtil;
@@ -27,7 +27,7 @@ public class HiveCreateExpireTable {
 
         boolean flag = true;
         Set<String> keys = null;
-        HiveTableData hiveTableData =null;
+        RedisHiveTableData redisHiveTableData =null;
         int count =0;
         while(flag){
             count++;
@@ -36,11 +36,11 @@ public class HiveCreateExpireTable {
             keys = JedisUtil.getKeys(HiveUtil.tableKeyPrefix+"*");
             if(!keys.isEmpty()){
                 for(String key:keys){
-                    hiveTableData = JSON.parseObject(JedisUtil.getValue(key),HiveTableData.class);
-                    if(hiveTableData.expired()){
-                        HiveUtil.deleteTable(hiveTableData.getTableName());
+                    redisHiveTableData = JSON.parseObject(JedisUtil.getValue(key), RedisHiveTableData.class);
+                    if(redisHiveTableData.expired()){
+                        HiveUtil.deleteTable(redisHiveTableData.getTableName());
                     }else{
-                        logger.info("Hive 表{} 未过期。",hiveTableData.getTableName());
+                        logger.info("Hive 表{} 未过期。", redisHiveTableData.getTableName());
                     }
                 }
             }else{
