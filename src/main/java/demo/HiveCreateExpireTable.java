@@ -22,7 +22,7 @@ public class HiveCreateExpireTable {
 
         for(int i=1 ; i < 4 ; i++){
             Thread.sleep(1000);
-            HiveUtil.createTable("t"+i,i);
+            HiveUtil.createTable("","t"+i,i);
         }
 
         boolean flag = true;
